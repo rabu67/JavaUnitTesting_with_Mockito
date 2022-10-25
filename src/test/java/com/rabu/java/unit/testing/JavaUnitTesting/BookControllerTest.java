@@ -119,6 +119,16 @@ public class BookControllerTest {
 		.andExpect(jsonPath("$.name", is("Updated name")));
 		
 	}
+	
+	@Test
+	public void deleteBook_success() throws Exception {
+		Mockito.when(bookRepository.findById(record_1.getBookId())).thenReturn(java.util.Optional.of(record_1));
+		
+		mockMvc.perform(MockMvcRequestBuilders
+				.delete("/book/1")
+				.contentType(MediaType.APPLICATION_JSON))
+					.andExpect(status().isOk());
+	}
 
 	
 }
